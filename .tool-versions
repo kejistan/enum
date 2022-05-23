@@ -1,0 +1,3 @@
+# Keep these up-to-date with Dockerfile.
+nodejs 16.13.0
+yarn 1.22.17
