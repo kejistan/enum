@@ -6,6 +6,7 @@
   "files": [
     "dist"
   ],
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "build": "tsc -p build.tsconfig.json"
@@ -17,5 +18,16 @@
     "jest": "^28.1.0",
     "ts-jest": "^28.0.2",
     "typescript": "^4.6.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kejistan/enum.git"
+  },
+  "keywords": [
+    "enum"
+  ],
+  "bugs": {
+    "url": "https://github.com/kejistan/enum/issues"
+  },
+  "homepage": "https://github.com/kejistan/enum#readme"
 }
