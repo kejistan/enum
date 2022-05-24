@@ -34,7 +34,7 @@ Enum({
 
 // string enums and number enums should be distinct
 // @ts-expect-error
-expectError(NumberExample.cast("one"));
+expectError(NumericExample.cast("one"));
 // @ts-expect-error
 expectError(StringExample.cast(1));
 
@@ -81,22 +81,26 @@ expectError(StringExample.cast(1));
 };
 
 // Exhaustive switch checks work
-(value: NumericExample): boolean => {
+(value: NumericExample) => {
   switch (value) {
     case NumericExample.ONE:
       return true;
     case NumericExample.TWO:
       return true;
   }
+
+  const assert: never = value;
 };
 
-(value: StringExample): boolean => {
+(value: StringExample) => {
   switch (value) {
     case StringExample.ONE:
       return true;
     case StringExample.TWO:
       return true;
   }
+
+  const assert: never = value;
 };
 
 // isValid does refinement

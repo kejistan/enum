@@ -1,38 +1,17 @@
-interface BaseStringEnum<T extends string> {
-  cast(input: string | null | undefined): T | undefined;
-  isValid(input: string | null | undefined): input is T;
-  members(): Iterable<T>;
-  getName(value: T): string;
-}
-
-interface BaseNumericEnum<T extends number> {
-  cast(input: number | null | undefined): T | undefined;
-  isValid(input: number | null | undefined): input is T;
-  members(): Iterable<T>;
-  getName(value: T): string;
-}
-
-export type StringEnum<T extends Record<string, string>> = BaseStringEnum<
-  T[keyof T]
-> & {
-  readonly [Name in keyof T]: T[Name];
-};
-
-export type NumericEnum<T extends Record<string, number>> = BaseNumericEnum<
-  T[keyof T]
-> & {
-  readonly [Name in keyof T]: T[Name];
-};
+export type Enum<T extends Record<string, any> = Record<string, any>> =
+  BaseEnum<T[keyof T]> & {
+    readonly [Name in keyof T]: T[Name];
+  };
 
 export function Enum<Values extends number, T extends Record<string, Values>>(
   definition: T & Record<Capitalize<keyof T & string>, unknown>
-): NumericEnum<T>;
-export function Enum<Value extends string, T extends Record<string, Value>>(
+): Enum<T>;
+export function Enum<Values extends string, T extends Record<string, Values>>(
   definition: T & Record<Capitalize<keyof T & string>, unknown>
-): StringEnum<typeof definition>;
+): Enum<T>;
 export function Enum(
-  definition: Record<string, string> | Record<string, number>
-): StringEnum<any> | NumericEnum<any> {
+  definition: Record<string, string | number>
+): Enum<typeof definition> {
   class AnEnum extends BaseEnumType<any> {
     constructor() {
       super(definition);
@@ -43,11 +22,24 @@ export function Enum(
     }
   }
 
-  return new AnEnum();
+  return new AnEnum() as any;
 }
 
-export type EnumType<T extends BaseNumericEnum<any> | BaseStringEnum<any>> =
-  NonNullable<ReturnType<T["cast"]>>;
+export type EnumType<T extends Enum> = NonNullable<ReturnType<T["cast"]>>;
+
+type RepresentationType<T> = T extends string
+  ? string
+  : T extends number
+  ? number
+  : never;
+
+interface BaseEnum<T> {
+  cast(input: RepresentationType<T> | null | undefined): T | undefined;
+  // @ts-ignore
+  isValid(input: RepresentationType<T> | null | undefined): input is T;
+  members(): Iterable<T>;
+  getName(value: T): string;
+}
 
 type EnumDefinition = {
   valuesToNames?: Map<unknown, string>;

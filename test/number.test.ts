@@ -35,7 +35,7 @@ test("members iterates over all values", () => {
 });
 
 test("getName returns the correct name", () => {
-  const name = NumberExample.getName(1);
+  const name = NumberExample.getName(NumberExample.ONE);
   expect(name).toBe("ONE");
 });
 
