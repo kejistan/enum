@@ -4,24 +4,24 @@ Inspired by [the enum implementation in Flow](https://flow.org/en/docs/enums/). 
 
 ## Usage
 
-Define enums via `Enum` and `EnumType`. Enum keys must be capitalized, lowercased names will result in type errors to avoid potential collisions with enum methods. Values can be strings or numbers, but all values must be of the same type:
+Define enums via `Enum` and `EnumValue`. Enum keys must be capitalized, lowercased names will result in type errors to avoid potential collisions with enum methods. Values can be strings or numbers, but all values must be of the same type:
 
 ```ts
-import { Enum, EnumType } from "@kejistan/enum";
+import { Enum, EnumValue } from "@kejistan/enum";
 
 const MyStringEnum = Enum({
   ValueOne: "one",
   ValueTwo: "two",
 });
 
-type MyStringEnum = EnumType<typeof MyStringEnum>;
+type MyStringEnum = EnumValue<typeof MyStringEnum>;
 
 const MyNumericEnum = Enum({
   ValueOne: 1,
   ValueTwo: 2,
 });
 
-type MyNumericEnum = EnumType<typeof MyNumericEnum>;
+type MyNumericEnum = EnumValue<typeof MyNumericEnum>;
 ```
 
 You can use the enum to access the specific values or to check and coerce unchecked values:
@@ -58,4 +58,4 @@ Enum values are not their own nominative types. This means that overlapping enum
 
 Enums with unknown members aren't implemented as I don't know of a mechanism to describe that in TypeScript.
 
-The Enum value type and the Enum collection are not exported via a single definition statement (this is the need for the extra `EnumType` declaration). I'm not sure how to replicate this in TypeScript
+The Enum value type and the Enum collection are not exported via a single definition statement (this is the need for the extra `EnumValue` declaration). I'm not sure how to replicate this in TypeScript
