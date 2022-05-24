@@ -25,7 +25,7 @@ export function Enum(
   return new AnEnum() as any;
 }
 
-export type EnumType<T extends Enum> = NonNullable<ReturnType<T["cast"]>>;
+export type EnumValue<T extends Enum> = NonNullable<ReturnType<T["cast"]>>;
 
 type RepresentationType<T> = T extends string
   ? string

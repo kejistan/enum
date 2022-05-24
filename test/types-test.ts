@@ -1,16 +1,16 @@
-import { Enum, EnumType } from "../src/index";
+import { Enum, EnumValue } from "../src/index";
 
 const NumericExample = Enum({
   ONE: 1,
   TWO: 2,
 });
-type NumericExample = EnumType<typeof NumericExample>;
+type NumericExample = EnumValue<typeof NumericExample>;
 
 const StringExample = Enum({
   ONE: "one",
   TWO: "two",
 });
-type StringExample = EnumType<typeof StringExample>;
+type StringExample = EnumValue<typeof StringExample>;
 
 // Mixed definitions should error
 // @ts-expect-error
