@@ -1,6 +1,6 @@
 {
   "name": "@kejistan/enum",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Enum utilities for typescript, inspired by flow enums",
   "main": "dist/index.js",
   "files": [
